@@ -2,11 +2,12 @@
  
 [![Build Status](https://github.com/evanpurkhiser/waitress/workflows/build/badge.svg)](https://github.com/omarnazih/youtube-dw.git)
 
-<!-- [Deployment](https://tubular-travesseiro-ab2ec7.netlify.app/)
-[API/Backend](https://smart-shorter-api.herokuapp.com/) -->
-
-- To Start Project run the following
-```
-npm install 
-npm run dev
-```
+## To Start the Project
+- Clone or download the repo
+- Create a virtual environment
+`virtualenv venv`
+- Navigate to virtual environement
+`venv/Scripts/activate`
+- Install Required packages
+`pip install requirements.txt`
+- Run `main.py` file
