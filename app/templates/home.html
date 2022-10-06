@@ -2,11 +2,36 @@
 
 {% block content %}
 
-{% include '_includes/Header.html' %}
-
 <section class="container mx-auto pt-[7rem]">
   {% include '_includes/HeroTitle.html' %}
   {% include '_includes/SearchBar.html' %}
 </section>
 
 {% endblock content %}
+
+{% block javascript %}
+<script>
+
+  const submitBtn = document.getElementById('submit-btn');
+  const ytUrl = document.getElementById('yt-url');
+  const endpoint = "{{url_for('get_video')}}"
+
+  submitBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    
+    if(!ytUrl.value){
+      alert("Value is empty")
+      ytUrl.focus()
+      return
+    }
+
+    if(!validateYoutubeUrl(ytUrl.value)){
+      alert("Invalid Youtube url")
+      ytUrl.focus()
+      return
+    }
+
+
+  })
+</script>
+{% endblock javascript %}

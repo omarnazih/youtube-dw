@@ -20,9 +20,13 @@ build/
 docs/_build/
 .vscode
 downloads/
+__pycache__/
+.__pycache__/
 
 # Coverage reports
 htmlcov/
 .coverage
 .coverage.*
 *,cover
+*.pyc
+__pycache__/config.cpython-39.pyc

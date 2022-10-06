@@ -1,8 +1,8 @@
-from flask import request, render_template, send_from_directory, abort
+from flask import request, render_template, send_from_directory, abort, flash
 from pytube import YouTube
+from werkzeug.utils import secure_filename
 
 from os import path
-
 from app import app
 
 
@@ -19,19 +19,16 @@ def index():
 def get_video():
     url = request.form.get('url')    
     yt = YouTube(url)
-
-    print(yt.title)
-    # FILE_NAME = f'{yt.title}.mp4'    
-    FILE_NAME = f'Test.mp4'    
-
-    print(FILE_NAME)
+    
+    FILE_NAME = secure_filename(f'{yt.title}.mp4')    
 
     yt.streams.filter(file_extension='mp4')    
     stream = yt.streams.get_by_itag(22)      
     
-    stream.download(FILE_PATH, filename='Test.mp4')
+    stream.download(FILE_PATH, filename=FILE_NAME)
 
     try:
+        flash("Downloading")
         return send_from_directory(FILE_PATH, FILE_NAME, as_attachment=True)    
     except FileNotFoundError:        
         abort(404)
