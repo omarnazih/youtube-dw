@@ -20,17 +20,15 @@
     e.preventDefault();
     
     if(!ytUrl.value){
-      alert("Value is empty")
+      flash("value is empty")
       ytUrl.focus()
       return
     }
 
     if(!validateYoutubeUrl(ytUrl.value)){
-      alert("Invalid Youtube url")
+      flash("Invalid Youtube url")
       ytUrl.focus()
-      return
     }
-
 
   })
 </script>

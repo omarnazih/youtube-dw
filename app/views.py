@@ -8,6 +8,7 @@ from app import app
 
 FILE_PATH = app.config['DOWNLOADS_FOLDER']    
 
+
 @app.route('/')
 @app.route('/home')
 @app.route('/index')
@@ -20,16 +21,16 @@ def get_video():
     url = request.form.get('url')    
     yt = YouTube(url)
     
-    FILE_NAME = secure_filename(f'{yt.title}.mp4')    
+    file_name: str = secure_filename(f'{yt.title}.mp4')
 
     yt.streams.filter(file_extension='mp4')    
     stream = yt.streams.get_by_itag(22)      
     
-    stream.download(FILE_PATH, filename=FILE_NAME)
+    stream.download(FILE_PATH, filename=file_name)
 
     try:
         flash("Downloading")
-        return send_from_directory(FILE_PATH, FILE_NAME, as_attachment=True)    
+        return send_from_directory(FILE_PATH, file_name, as_attachment=True)
     except FileNotFoundError:        
         abort(404)
 
@@ -38,4 +39,4 @@ def get_video():
 @app.errorhandler(404)
 @app.errorhandler(405)
 def _handle_api_error(ex):        
-    return render_template('error.html', msg=ex, code=ex.code)        
+    return render_template('error.html', msg=ex, code=ex.code)
